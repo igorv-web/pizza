@@ -1,0 +1,91 @@
+<button type="button" class="btn btn-primary" (click)="openModal(template)">Add</button>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New product</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group mb-3">
+        <select class="custom-select" [(ngModel)]="currentCategory" name="currentCategory">
+          <option [ngValue]="cat" *ngFor="let cat of adminCategories">{{cat.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="prodName">Name</label>
+        <input [(ngModel)]="prodName" name="prodName" type="text" class="form-control" id="prodName" />
+      </div>
+      <div class="form-group">
+        <label for="prodDesc">Description</label>
+        <textarea [(ngModel)]="prodDesc" name="prodDesc" id="prodDesc" cols="60" rows="5"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="prodURLName">URLName</label>
+        <input [(ngModel)]="prodURLName" name="prodURLName" type="text" class="form-control" id="prodURLName" />
+      </div>
+      <div class="form-group">
+        <label for="prodPrice">Price</label>
+        <input [(ngModel)]="prodPrice" name="prodPrice" type="text" class="form-control" id="prodPrice" />
+      </div>
+      <div class="form-group">
+        <div class="custom-file mb-3">
+          <label for="prodImage">Image</label>
+          <input (change)="uploadFile($event)" type="file" class="custom-file-input" id="prodImage">
+          <label class="custom-file-label" for="prodImage">Choose file...</label>
+        </div>
+        <div class="progress mt-3 mb-3" *ngIf="!uploadStatus">
+          <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+            [style.width]="(uploadProgress | async) + '%'" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div class="form-group" *ngIf="uploadStatus">
+          <img [src]="prodImage" alt="" width="200px">
+          <button (click)="deleteImage()" type="button" class="btn btn-danger ml-3">delete</button>
+        </div>
+      </div>
+      <button *ngIf="!editStatus" (click)="addProduct()" type="button" class="btn btn-success">
+        Add
+      </button>
+      <button *ngIf="editStatus" (click)="saveProduct()" type="button" class="btn btn-info">
+        Save
+      </button>
+    </form>
+  </div>
+</ng-template>
+
+<table class="table mt-2">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">URLName</th>
+      <th scope="col">Category</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prod of adminProducts">
+      <td>{{ prod.id }}</td>
+      <td>{{ prod.name }}</td>
+      <td>{{ prod.urlName }}</td>
+      <td>{{ prod.category.name }}</td>
+      <td>{{ prod.description }}</td>
+      <td>{{ prod.price }}</td>
+      <td><img [src]="prod.image" alt="" width="75px"></td>
+      <td>
+        <button (click)="editProduct(prod, template)" class="btn btn-warning">Edit</button>
+      </td>
+      <td>
+        <button (click)="deleteProduct(prod)" class="btn btn-danger">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

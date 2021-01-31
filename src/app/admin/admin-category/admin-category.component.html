@@ -1,0 +1,55 @@
+<button type="button" class="btn btn-primary" (click)="openModal(template)">Add</button>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New category</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="catName">Name</label>
+        <input [(ngModel)]="catName" name="catName" type="text" class="form-control" id="catName" />
+      </div>
+      <div class="form-group">
+        <label for="catURLName">URLName</label>
+        <input [(ngModel)]="catURLName" name="catURLName" type="text" class="form-control" id="catURLName" />
+      </div>
+      <button *ngIf="!editStatus" (click)="addCategory()" type="button" class="btn btn-success">
+        Add
+      </button>
+      <button *ngIf="editStatus" (click)="saveCategory()" type="button" class="btn btn-info">
+        Save
+      </button>
+    </form>
+  </div>
+</ng-template>
+
+<table class="table mt-2">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">URLName</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cat of adminCategories">
+      <td>{{ cat.id }}</td>
+      <td>{{ cat.name }}</td>
+      <td>{{ cat.urlName }}</td>
+      <td>
+        <button (click)="editCategory(cat, template)" class="btn btn-warning">Edit</button>
+      </td>
+      <td>
+        <button (click)="deleteCategory(cat)" class="btn btn-danger">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

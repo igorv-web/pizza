@@ -1,0 +1,20 @@
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col-3">
+      <div class="nav flex-column nav-pills">
+        <a class="nav-link" [routerLink]="[ 'blogs' ]" routerLinkActive="active">Blogs</a>
+      </div>
+      <div class="nav flex-column nav-pills">
+        <a class="nav-link" [routerLink]="[ 'categories' ]" routerLinkActive="active">Categories</a>
+      </div>
+      <div class="nav flex-column nav-pills">
+        <a class="nav-link" [routerLink]="[ 'product' ]" routerLinkActive="active">Products</a>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="tab-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

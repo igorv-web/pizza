@@ -1,0 +1,51 @@
+<form>
+  <div class="form-group">
+    <label for="blogTitle">Title</label>
+    <input [(ngModel)]="blogTitle" name="blogTitle" type="text" class="form-control" id="blogTitle"
+      [class.red]="isRed" />
+  </div>
+  <div class="form-group">
+    <label for="blogText">Text</label>
+    <textarea [(ngModel)]="blogText" name="blogText" id="" class="form-control" [class.red]="isRed"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="blogAuthor">Author</label>
+    <input [(ngModel)]="blogAuthor" name="blogAuthor" type="text" class="form-control" id="blogAuthor"
+      [class.red]="isRed" />
+  </div>
+  <button *ngIf="!editStatus" (click)="addBlog()" type="button" class="btn btn-success">
+    Add
+  </button>
+  <button *ngIf="editStatus" (click)="saveBlog()" type="button" class="btn btn-info">
+    Save
+  </button>
+</form>
+
+<table class="table mt-2">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Text</th>
+      <th scope="col">Author</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let blog of adminBlog">
+      <td>{{ blog.id }}</td>
+      <td>{{ blog.title }}</td>
+      <td>{{ blog.text }}</td>
+      <td>{{ blog.author }}</td>
+      <td>
+        <button (click)="editBlog(blog)" class="btn btn-warning">Edit</button>
+      </td>
+      <td>
+        <button (click)="deleteBlog(blog)" class="btn btn-danger">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

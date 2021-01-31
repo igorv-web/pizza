@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-4" *ngFor="let blog of blogs">
+      <div class="card">
+        <img [src]="blog.image" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="text-primary">{{blog.author}}</p>
+          <h5 class="card-title text-left">{{ blog.title }}</h5>
+          <div class="d-flex">
+            <p>{{blog.text}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

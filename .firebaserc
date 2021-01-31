@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "pizza-webdev": {
+      "hosting": {
+        "pizza": [
+          "pizza-webdev"
+        ]
+      }
+    }
+  }
+}
