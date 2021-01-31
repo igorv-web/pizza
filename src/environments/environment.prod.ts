@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  firebase: {
+  firebaseConfig: {
     apiKey: "AIzaSyBDFki0yrEPCB4BvBOWWb6_3jAwjsW0l5I",
     authDomain: "pizza-webdev.firebaseapp.com",
     projectId: "pizza-webdev",
